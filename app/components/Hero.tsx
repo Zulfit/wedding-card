@@ -15,12 +15,13 @@ interface HeroProps {
 
 export default function Hero({ bride, groom, date, location }: HeroProps) {
     return (
-        <section className="relative h-[100dvh] w-full max-w-md mx-auto flex flex-col items-center justify-between overflow-hidden bg-[#FFFDFA]">
+        <section className="relative h-dvh w-full max-w-md mx-auto flex flex-col items-center justify-between overflow-hidden bg-[#FFFDFA]">
             {/* Background Image */}
             <Image
                 src="/images/bg-wedding-card.jpg"
                 alt="Hero Background"
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover z-0"
                 priority
             />
