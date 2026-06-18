@@ -24,8 +24,14 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Wedding Invitation",
-  description: "Wedding Invitation",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+  ),
+  title: {
+    default: "Wedding Invitation",
+    template: "%s",
+  },
+  description: "Digital wedding invitation",
 };
 
 export default function RootLayout({
