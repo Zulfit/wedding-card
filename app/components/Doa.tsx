@@ -1,4 +1,4 @@
-import Section from "./Section";
+import Section, { SectionHeader } from "./Section";
 import FadeIn from "./FadeIn";
 import type { WeddingDoa } from "@/data/weddings";
 
@@ -8,9 +8,9 @@ interface DoaProps {
 
 export default function Doa({ doa }: DoaProps) {
   return (
-    <Section id="doa">
+    <Section id="doa" className="!min-h-0" bg="cream">
       <FadeIn className="w-full flex flex-col items-center text-center">
-        <div className="w-12 h-px bg-[#d2c9bd] mb-10" aria-hidden="true" />
+        <SectionHeader title="Doa" />
 
         {doa.arabic && (
           <p
@@ -23,7 +23,7 @@ export default function Doa({ doa }: DoaProps) {
 
         <blockquote className="max-w-sm">
           <p className="text-sm sm:text-base text-[#5a564e] leading-relaxed italic font-serif">
-            {doa.text}
+            &ldquo;{doa.text}&rdquo;
           </p>
         </blockquote>
 

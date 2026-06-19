@@ -10,7 +10,7 @@ export default function ProgramTimeline({ program }: ProgramTimelineProps) {
   return (
     <Section id="program">
       <FadeIn className="w-full flex flex-col items-center flex-1">
-        <SectionHeader title="Program of the day" subtitle="wedding schedule" />
+        <SectionHeader title="Program of the day" />
 
         <div className="relative w-full flex-1">
           <div

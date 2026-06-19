@@ -27,18 +27,15 @@ export default function Section({
 
 interface SectionHeaderProps {
   title: string;
-  subtitle: string;
 }
 
-export function SectionHeader({ title, subtitle }: SectionHeaderProps) {
+export function SectionHeader({ title }: SectionHeaderProps) {
   return (
-    <div className="w-full mb-12 relative">
+    <div className="w-full mb-12 relative text-center">
       <h2 className="text-[34px] sm:text-4xl font-serif text-[#4a453e] mb-1 z-10 relative">
         {title}
       </h2>
-      <p className="text-3xl sm:text-[34px] font-script text-[#b5a999] absolute -bottom-5 right-4 z-0">
-        {subtitle}
-      </p>
+      <div className="w-12 h-px bg-[#d2c9bd] mt-10 mx-auto" aria-hidden="true" />
     </div>
   );
 }

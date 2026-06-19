@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback, useSyncExternalStore } from "react";
-import Section from "./Section";
+import Section, { SectionHeader } from "./Section";
 import FadeIn from "./FadeIn";
 import type { Wedding } from "@/data/weddings";
 import { buildIcsContent, getGoogleCalendarUrl } from "@/lib/calendar";
@@ -67,30 +67,28 @@ export default function Countdown({ wedding }: CountdownProps) {
   const emptyDays = Array(wedding.date.calendarStartOffset).fill(null);
   const dates = Array.from({ length: wedding.date.calendarDays }, (_, i) => i + 1);
 
-  if (!isClient) return null;
+  const countdownUnits = isClient
+    ? Object.entries(timeLeft)
+    : (["days", "hours", "minutes", "seconds"] as const).map((unit) => [unit, "--"] as const);
 
   return (
-    <Section id="countdown">
+    <Section id="countdown" className="!min-h-0" bg="cream">
       <FadeIn className="w-full flex flex-col items-center">
         <div className="absolute top-0 left-0 w-full h-32 bg-linear-to-b from-white/30 to-transparent pointer-events-none" />
 
-        <h2 className="text-5xl font-script text-[#3D3A38] mb-4 z-10 text-center leading-tight">
-          Save The Date
-        </h2>
-        <div className="w-16 h-px bg-[#d2c9bd] mb-12 z-10" aria-hidden="true" />
-
+        <SectionHeader title="Save The Date" />
         <div
           className="flex space-x-3 sm:space-x-4 mb-10 z-10"
           role="timer"
           aria-live="polite"
           aria-label="Countdown to wedding day"
         >
-          {Object.entries(timeLeft).map(([unit, value]) => (
+          {countdownUnits.map(([unit, value]) => (
             <div key={unit} className="flex flex-col items-center">
               <div className="w-16 h-16 flex items-center justify-center bg-white border border-[#e8dfd5] rounded-xl shadow-sm mb-3 text-[#3D3A38]">
                 <span className="text-2xl sm:text-3xl font-serif font-light">{value}</span>
               </div>
-              <span className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-[#5a564e]">
+              <span className="text-[10px] uppercase tracking-widest font-bold text-[#5a564e]">
                 {unit}
               </span>
             </div>

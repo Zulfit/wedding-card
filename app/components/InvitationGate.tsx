@@ -6,6 +6,7 @@ interface InvitationGateProps {
   bride: string;
   groom: string;
   heroImage: string;
+  guestName?: string;
   onOpen: () => void;
   isClosing?: boolean;
 }
@@ -14,6 +15,7 @@ export default function InvitationGate({
   bride,
   groom,
   heroImage,
+  guestName,
   onOpen,
   isClosing = false,
 }: InvitationGateProps) {
@@ -42,7 +44,13 @@ export default function InvitationGate({
             </span>
           </p>
 
-          <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-[#8c7e6b] mb-4">
+          {guestName && (
+            <p className="text-sm font-serif text-[#4a453e] mb-3">
+              Dear <span className="font-semibold">{guestName}</span>,
+            </p>
+          )}
+
+          <p className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#8c7e6b] mb-4">
             Wedding Invitation
           </p>
 
@@ -61,18 +69,24 @@ export default function InvitationGate({
           >
             Open Invitation
           </button>
-
-          <p className="mt-4 text-[10px] tracking-widest uppercase text-[#8c7e6b] font-semibold">
-            Buka
+          <p className="mt-2 text-[10px] tracking-widest text-[#8c7e6b] font-medium">
+            Buka Jemputan
           </p>
         </div>
 
-        <div className="absolute bottom-10 left-0 right-0 flex flex-col items-center z-10 text-[#8c7e6b] animate-bounce-subtle">
-          <span className="text-[9px] tracking-[0.2em] uppercase font-bold mb-1">Tap to begin</span>
+        {/* <button
+          type="button"
+          onClick={onOpen}
+          className="absolute bottom-10 left-0 right-0 flex flex-col items-center z-10 text-[#8c7e6b] animate-bounce-subtle cursor-pointer hover:text-[#4a453e] transition-colors"
+          aria-label="Open invitation"
+        >
+          <span className="text-[10px] tracking-[0.15em] uppercase font-bold mb-1">
+            Tap to begin
+          </span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
-        </div>
+        </button> */}
       </div>
     </div>
   );

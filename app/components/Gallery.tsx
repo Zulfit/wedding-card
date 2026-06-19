@@ -9,9 +9,16 @@ interface GalleryProps {
 
 export default function Gallery({ items }: GalleryProps) {
   return (
-    <Section id="gallery">
+    <Section id="gallery" bg="white" className="!min-h-0">
       <FadeIn className="w-full">
-        <SectionHeader title="Our moments" subtitle="a little gallery" />
+        <SectionHeader title="Our moments"/>
+
+        <p className="text-[11px] text-[#8c7e6b] tracking-wide mb-4 -mt-6 flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          Swipe to see more
+        </p>
 
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2 w-full scrollbar-hide">
           {items.map((item) => (
@@ -28,7 +35,7 @@ export default function Gallery({ items }: GalleryProps) {
                   className="object-cover"
                 />
               </div>
-              <figcaption className="px-4 py-3 text-[10px] tracking-widest uppercase font-bold text-[#8c7e6b] text-center">
+              <figcaption className="px-4 py-3 text-[11px] tracking-wide font-semibold text-[#8c7e6b] text-center">
                 {item.alt}
               </figcaption>
             </figure>

@@ -9,6 +9,7 @@ interface HeroProps {
   date: WeddingDate;
   venue: WeddingVenue;
   heroImage: string;
+  guestName?: string;
 }
 
 export default function Hero({
@@ -18,6 +19,7 @@ export default function Hero({
   date,
   venue,
   heroImage,
+  guestName,
 }: HeroProps) {
   const shareTitle = `${bride} & ${groom} — ${eventType}`;
   const shareText = `You're invited to our ${eventType} on ${date.dayName}, ${date.dayNumber} ${date.month} ${date.year}.`;
@@ -38,19 +40,24 @@ export default function Hero({
       />
       <div className="absolute inset-0 bg-white/30 z-[1]" aria-hidden="true" />
 
-      <div className="flex flex-col items-center mt-12 z-10 text-[#5a564e] tracking-[0.2em] text-[10px] sm:text-xs font-semibold text-center uppercase space-y-6">
+      <div className="flex flex-col items-center mt-10 z-10 text-[#5a564e] tracking-[0.2em] text-xs font-semibold text-center uppercase space-y-5">
+        {guestName && (
+          <p className="px-5 py-1.5 rounded-full bg-white/70 backdrop-blur-sm text-[11px] tracking-[0.15em] normal-case font-serif text-[#4a453e]">
+            Dear <span className="font-semibold">{guestName}</span>
+          </p>
+        )}
         <p className="text-xl font-normal lowercase tracking-normal font-sans" dir="rtl">
           <span className="text-2xl sm:text-3xl text-[#4a453e]">
             بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
           </span>
         </p>
-        <div className="space-y-1.5">
+        <div className="space-y-1">
           <p>Together</p>
           <p>With our families</p>
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center z-10 mt-6 sm:mt-8">
+      <div className="flex flex-col items-center justify-center z-10 mt-4 sm:mt-6">
         <h1 className="text-6xl sm:text-7xl font-script text-[#3D3A38] leading-none mb-1">
           {bride}
         </h1>
@@ -62,15 +69,15 @@ export default function Hero({
         </h1>
       </div>
 
-      <div className="flex flex-col items-center z-10 text-[#5a564e] text-center mb-24 space-y-7 w-full p-8">
-        <p className="text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] font-bold leading-loose max-w-[280px]">
+      <div className="flex flex-col items-center z-10 text-[#5a564e] text-center mb-24 space-y-6 w-full p-8">
+        <p className="text-[10px] sm:text-[11px] tracking-[0.15em] sm:tracking-[0.2em] font-bold leading-loose max-w-[280px]">
           REQUEST THE HONOR OF YOUR
           <br />
           PRESENCE AT THE {eventType.toUpperCase()} ON
         </p>
 
-        <div className="flex flex-col items-center mt-2">
-          <p className="text-[10px] sm:text-xs font-bold tracking-[0.2em] mb-4 uppercase">
+        <div className="flex flex-col items-center">
+          <p className="text-[10px] sm:text-xs font-bold tracking-[0.2em] mb-3 uppercase">
             {date.month}
           </p>
           <div className="flex items-center text-[10px] sm:text-xs font-bold tracking-widest uppercase">
@@ -80,28 +87,30 @@ export default function Hero({
               {date.dayNumber}
             </span>
             <div className="w-px h-8 bg-[#5a564e]/50" aria-hidden="true" />
-            <span className="w-20 text-left pl-4">{date.time}</span>
+            <span className="w-20 text-left pl-4 text-[9px] sm:text-[10px] leading-tight">
+              {date.time}
+            </span>
           </div>
-          <p className="text-[10px] sm:text-xs font-bold tracking-[0.2em] mt-4">
+          <p className="text-[10px] sm:text-xs font-bold tracking-[0.2em] mt-3">
             {date.year}
           </p>
         </div>
 
-        <div className="flex flex-col items-center space-y-1 text-[9px] sm:text-[10px] tracking-[0.15em] uppercase font-bold mt-2">
+        <div className="flex flex-col items-center space-y-1 text-[10px] tracking-[0.15em] uppercase font-bold">
           {venue.lines.map((line) => (
             <p key={line}>{line}</p>
           ))}
         </div>
       </div>
 
-      <div className="absolute bottom-6 w-full px-8 flex justify-between items-center z-20 text-[#3D3A38]">
+      {/* <div className="absolute bottom-6 w-full px-6 flex justify-between items-center z-20 text-[#3D3A38]">
         <a
           href="#details"
-          className="flex items-center space-x-2 font-medium text-sm sm:text-base hover:opacity-70 transition-opacity"
+          className="flex flex-col items-center gap-0.5 font-medium text-[#4a453e] hover:opacity-70 transition-opacity animate-bounce-subtle"
         >
           <svg
-            width="18"
-            height="18"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -112,10 +121,10 @@ export default function Hero({
           >
             <path d="M12 5v14M5 12l7 7 7-7" />
           </svg>
-          <span className="font-bold tracking-wide">Details</span>
+          <span className="text-[10px] font-bold tracking-widest uppercase">Scroll</span>
         </a>
         <ShareButton title={shareTitle} text={shareText} />
-      </div>
+      </div> */}
     </section>
   );
 }

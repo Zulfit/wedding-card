@@ -16,21 +16,50 @@ export interface WeddingDate {
   calendarStartOffset: number;
   calendarDays: number;
   weddingDay: number;
+  malayDayName?: string;
+  malayMonth?: string;
 }
 
 export interface WeddingVenue {
   lines: string[];
   address: string;
-  mapsUrl: string;
-  embedUrl: string;
+  googleMapsUrl: string;
+  wazeUrl: string;
+  appleMapsUrl: string;
+  embedUrl?: string;
+}
+
+export interface WeddingDressColor {
+  name: string;
+  hex: string;
+}
+
+export interface WeddingDressCode {
+  description: string;
+  colors: WeddingDressColor[];
+  note?: string;
+}
+
+export interface WeddingContact {
+  name: string;
+  role: string;
+  phone: string;
+  whatsapp: string;
 }
 
 export interface WeddingDetails {
-  dressCode: string;
-  parking: string;
-  contact: { label: string; href: string };
-  contacts: { name: string; role: string; href: string }[];
+  dressCode: WeddingDressCode;
+  contacts: WeddingContact[];
   giftNote: string;
+}
+
+export interface WeddingParentsInvitation {
+  opening: string;
+  fatherName: string;
+  motherName: string;
+  guestHonorifics: string;
+  guestTitles: string;
+  ceremonyText: string;
 }
 
 export interface WeddingDoa {
@@ -52,7 +81,8 @@ export interface Wedding {
   date: WeddingDate;
   venue: WeddingVenue;
   details: WeddingDetails;
-  program: WeddingProgramItem[];
+  parentsInvitation: WeddingParentsInvitation;
+  program?: WeddingProgramItem[];
   music: string;
   gallery: WeddingGalleryItem[];
   heroImage: string;
@@ -61,6 +91,10 @@ export interface Wedding {
 }
 
 export const defaultSlug = "halima-yunus";
+
+const VENUE_QUERY = encodeURIComponent(
+  "Dewan Anggerik Glenmarie, Jalan Kurator U1/61, Shah Alam"
+);
 
 export const weddings: Record<string, Wedding> = {
   "halima-yunus": {
@@ -80,59 +114,52 @@ export const weddings: Record<string, Wedding> = {
       calendarStartOffset: 2,
       calendarDays: 31,
       weddingDay: 30,
+      malayDayName: "AHAD",
+      malayMonth: "DIS",
     },
     venue: {
       lines: ["Dewan Anggerik Glenmarie", "Jalan Kurator U1/61, Kawasan", "Perindustrian Temasya, 40150 Shah Alam"],
       address: "Dewan Anggerik Glenmarie, Jalan Kurator U1/61, Kawasan Perindustrian Temasya, 40150 Shah Alam",
-      mapsUrl:
-        "https://www.google.com/maps/search/?api=1&query=43+Meam+Street+Blackburn+BB1+9TQ",
-      embedUrl:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2370.0!2d-2.48!3d53.75!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDMgTWVhbSBTdHJlZXQsIEJsYWNrYnVybiBCQjEgOVRR!5e0!3m2!1sen!2suk!4v1",
+      googleMapsUrl: `https://www.google.com/maps/search/?api=1&query=${VENUE_QUERY}`,
+      wazeUrl: `https://waze.com/ul?q=${VENUE_QUERY}`,
+      appleMapsUrl: `https://maps.apple.com/?q=${VENUE_QUERY}`,
+    },
+    parentsInvitation: {
+      opening: "Dengan penuh kesyukuran,",
+      fatherName: "ABDULLAH BIN AHMAD",
+      motherName: "FATIMAH BINTI HASSAN",
+      guestHonorifics: "menjemput Yang Berbahagia",
+      guestTitles:
+        "Tan Sri/ Puan Sri/ Dato' Seri/ Datin Seri/ Dato'/ Datin/ Tuan/ Puan/ Encik/ Cik",
+      ceremonyText: "ke majlis perkahwinan puteri kami dengan pasangannya",
     },
     details: {
-      dressCode: "Formal attire. Modest dress appreciated.",
-      parking: "Parking available at the venue and nearby areas.",
-      contact: {
-        label: "Message us on WhatsApp",
-        href: "https://wa.me/447000000000",
+      dressCode: {
+        description: "Pakaian formal dan sopan digalakkan.",
+        colors: [
+          { name: "Ivory", hex: "#FFFFF0" },
+          { name: "Gold", hex: "#D4AF37" },
+          { name: "Sage", hex: "#9CAF88" },
+        ],
+        note: "Sila elakkan warna putih dan hitam.",
       },
       contacts: [
         {
-          name: "Halima",
-          role: "Bride",
-          href: "https://wa.me/447000000001",
+          name: "Abdullah bin Ahmad",
+          role: "Father",
+          phone: "tel:+60123456789",
+          whatsapp: "https://wa.me/60123456789",
         },
         {
-          name: "Yunus",
-          role: "Groom",
-          href: "https://wa.me/447000000002",
+          name: "Ahmad bin Abdullah",
+          role: "Brother",
+          phone: "tel:+60198765432",
+          whatsapp: "https://wa.me/60198765432",
         },
       ],
       giftNote:
         "Your presence and duas are the greatest gift. If you wish to give, a contribution to our new home would be warmly received.",
     },
-    program: [
-      {
-        time: "16:00",
-        title: "Guest Arrival",
-        desc: "Welcome drinks and mingling",
-      },
-      {
-        time: "16:30",
-        title: "Wedding Ceremony",
-        desc: "The main event of the day",
-      },
-      {
-        time: "17:20",
-        title: "Photoshoot",
-        desc: "Photo session of the newlyweds with guests",
-      },
-      {
-        time: "18:00",
-        title: "Banquet",
-        desc: "Time to enjoy the evening, relax and dance",
-      },
-    ],
     music: "/songs/wedding-song.mp3",
     gallery: [
       { src: "/gallery/photo-1.svg", alt: "Halima and Yunus" },
